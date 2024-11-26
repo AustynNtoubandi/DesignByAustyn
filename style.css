@@ -45,7 +45,8 @@ body {
     font-size: 4rem;
     text-transform: uppercase;
     color: #f5f5f5;
-    text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    animation: neonGlow 2s infinite alternate;
 }
 
 .hero p {
@@ -111,46 +112,88 @@ body {
     margin: auto;
 }
 
+/* About Section */
 #about img {
     width: 150px;
     border-radius: 50%;
     margin-right: 20px;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Portfolio Styling */
-/* Portfolio Styling */
+#about img:hover {
+    transform: rotate(-5deg) scale(1.1);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+#about img::after {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    width: 180px;
+    height: 180px;
+    border: 2px solid transparent;
+    border-top: 2px solid #ff5f6d;
+    border-right: 2px solid #ffc371;
+    border-bottom: 2px solid #ff5f6d;
+    border-left: 2px solid #ffc371;
+    border-radius: 50%;
+    animation: spin 3s linear infinite;
+    z-index: -1;
+}
+
+/* Portfolio Section */
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    justify-items: center; /* Zorgt ervoor dat items gecentreerd staan */
+    justify-items: center;
     padding: 20px 0;
 }
 
 .portfolio-item {
-    width: 100%; /* Zorg ervoor dat de items de volledige breedte gebruiken binnen hun container */
-    max-width: 300px; /* Beperk de maximale breedte van elk item */
+    width: 100%;
+    max-width: 300px;
 }
 
 .portfolio-item img {
-    width: 100%; /* Afbeelding vult het item volledig */
-    aspect-ratio: 1 / 1; /* Houdt de afbeeldingen vierkant */
+    width: 100%;
+    aspect-ratio: 1 / 1;
     border-radius: 10px;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .portfolio-item img:hover {
-    transform: scale(1.1);
-    box-shadow: 0px 10px 20px rgba(255, 95, 109, 0.4);
+    transform: rotate(-5deg) scale(1.05);
+    box-shadow: 0px 15px 30px rgba(255, 95, 109, 0.4);
 }
 
-/* Media Queries */
-@media (max-width: 768px) {
-    .portfolio-grid {
-        grid-template-columns: 1fr; /* Eén kolom op kleine schermen */
-    }
+/* Contact Section */
+.social-links a {
+    display: inline-block;
+    margin: 10px 0;
+    font-size: 1.2rem;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s, transform 0.3s ease;
 }
 
+.social-links a:hover {
+    color: #ff5f6d;
+    transform: translateY(-3px);
+}
+
+.social-links i {
+    margin-right: 10px;
+    color: #ffc371;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover i {
+    color: #ff5f6d;
+}
 
 /* Footer */
 footer {
@@ -169,58 +212,6 @@ footer {
     }
 }
 
-/* Ronde afbeelding in About Me */
-#about img {
-    width: 150px;
-    border-radius: 50%;
-    margin-right: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Voor vloeiende overgangen */
-}
-
-#about img:hover {
-    transform: rotate(-5deg) scale(1.1); /* Lichtjes schuin draaien en inzoomen */
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5); /* Schaduw voor diepte */
-}
-
-/* Portfolio-afbeeldingen */
-.portfolio-item img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    border-radius: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Voeg overgangseffecten toe */
-}
-
-.portfolio-item img:hover {
-    transform: rotate(-5deg) scale(1.05); /* Schuin draaien en lichtjes inzoomen */
-    box-shadow: 0px 15px 30px rgba(255, 95, 109, 0.4); /* Accentueer de schaduw */
-}
-
-/* Social Links Styling */
-.social-links a {
-    display: inline-block;
-    margin: 10px 0;
-    font-size: 1.2rem;
-    color: #fff;
-    text-decoration: none; /* Verwijdert de onderlijn */
-    transition: color 0.3s, transform 0.3s ease; /* Voegt een overgangseffect toe */
-}
-
-.social-links a:hover {
-    color: #ff5f6d; /* Verandert de kleur bij hover */
-    transform: translateY(-3px); /* Laat de link lichtjes omhoog bewegen */
-}
-
-.social-links i {
-    margin-right: 10px; /* Ruimte tussen het icoon en de tekst */
-    color: #ffc371; /* Kleur van het icoon */
-    transition: color 0.3s ease; /* Effect bij hover */
-}
-
-.social-links a:hover i {
-    color: #ff5f6d; /* Kleur van het icoon verandert bij hover */
-}
-
-/* Neon Effect */
 @keyframes neonGlow {
     0% {
         text-shadow: 0 0 5px #ff5f6d, 0 0 10px #ff5f6d, 0 0 20px #ff5f6d, 0 0 30px #ffc371, 0 0 40px #ffc371, 0 0 50px #ffc371, 0 0 60px #ffc371;
@@ -233,52 +224,18 @@ footer {
     }
 }
 
-/* Apply Neon Effect */
-.hero h1 {
-    font-family: 'Monoton', cursive;
-    font-size: 4rem;
-    text-transform: uppercase;
-    color: #f5f5f5;
-    text-shadow: 0 0 5px #ff5f6d, 0 0 10px #ff5f6d, 0 0 20px #ff5f6d, 0 0 30px #ffc371, 0 0 40px #ffc371, 0 0 50px #ffc371, 0 0 60px #ffc371;
-    animation: neonGlow 2s infinite alternate; /* Activeert de animatie */
-}
-
-.social-links a {
-    animation: neonGlow 2s infinite alternate;
-}
-
-/* Draaiend effect rond de foto */
-#about img {
-    width: 150px;
-    border-radius: 50%;
-    margin-right: 20px;
-    position: relative; /* Nodig voor het pseudo-element */
-    z-index: 1;
-}
-
-#about img::after {
-    content: '';
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    width: 180px; /* Zorg dat het iets groter is dan de foto */
-    height: 180px;
-    border: 2px solid transparent;
-    border-top: 2px solid #ff5f6d; /* Kleur van de bovenste lijn */
-    border-right: 2px solid #ffc371; /* Kleur van de rechter lijn */
-    border-bottom: 2px solid #ff5f6d; /* Kleur van de onderste lijn */
-    border-left: 2px solid #ffc371; /* Kleur van de linker lijn */
-    border-radius: 50%;
-    animation: spin 3s linear infinite; /* Draaiende animatie */
-    z-index: -1; /* Zorg dat het achter de foto blijft */
-}
-
-/* Animatie voor draaien */
 @keyframes spin {
     from {
         transform: rotate(0deg);
     }
     to {
         transform: rotate(360deg);
+    }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr;
     }
 }
